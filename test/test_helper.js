@@ -1,21 +1,23 @@
+// ---------------------------------------
+// Test Environment Setup
+// ---------------------------------------
 import {expect} from "chai";
 import sinon from "sinon";
-import jsdom from "jsdom";
 
+global.expect = expect;
 global.expect = expect;
 global.sinon = sinon;
 
+// ---------------------------------------
+// Require Tests
+// ---------------------------------------
+// for use with karma-webpack-with-fast-source-maps
+const __karmaWebpackManifest__ = [] // eslint-disable-line
+const inManifest = path => ~__karmaWebpackManifest__.indexOf(path)
 
-global.document = jsdom.jsdom('');
-global.window = document.defaultView;
-var exposedProperties = ['window', 'navigator', 'document'];
-Object.keys(document.defaultView).forEach((property) => {
-    if (typeof global[property] === 'undefined') {
-        exposedProperties.push(property);
-        global[property] = document.defaultView[property];
-    }
-});
+// require all `**/*.spec.js`
+const testsContext = require.context('./', true, /\.spec\.js$/)
 
-global.navigator = {
-    userAgent: 'node.js'
-};
+// only run tests that have changed after the first pass.
+const testsToRun = testsContext.keys().filter(inManifest)
+;(testsToRun.length ? testsToRun : testsContext.keys()).forEach(testsContext)

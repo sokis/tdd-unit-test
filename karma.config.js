@@ -1,41 +1,3 @@
-# TDD Unit Test-
-TDD教程 练习
-
-## 安装
-
-```
-git clone https://github.com/sokis/tdd-unit-test-.git tdd-unit-test
-cd tdd-unit-test
-
-npm install
-
-# open split terminal window
-npm run dev      # get webpack server running
-npm run dev:test # to get karma test server going
-```
-
-
-## 设置 Karma
-
-```
-npm i karma karma-chai karma-mocha karma-webpack --save-dev
-npm i karma-sourcemap-loader karma-phantomjs-launcher --save-dev
-npm i karma-spec-reporter --save-dev
-npm i phantomjs --save-dev
-
-# The polyfills arn't required but will help with browser support issues
-# and are easy enough to include in our karma config that I figured why not
-npm i babel-polyfill phantomjs-polyfill --save-dev
-```
-
-
-## 创建 Karma Config
-
-```
-touch karma.config.js
-```
-
-```javascript
 // ./karma.config.js
 
 var argv = require('yargs').argv;
@@ -117,13 +79,3 @@ module.exports = function(config) {
     ]
   });
 };
-```
-
-## 修改 package.json
-
-```javascript
-  "scripts" {
-    "test": "node_modules/.bin/karma start karma.config.js",
-    "test:dev": "npm run test -- --watch",
-  }
-```
