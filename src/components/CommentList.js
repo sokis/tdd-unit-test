@@ -6,17 +6,20 @@ const propTypes = {
 };
 
 class CommentList extends Component {
-    componentDidMount() {
-        this.props.onMount();
-    }
+  componentDidMount() {
+    this.props.onMount();
+  }
 
-    render() {
-        return (
-            <ul>
-                <li> Comment One </li>
-            </ul>
-        )
-    }
+  render() {
+    const { isActive } = this.props;
+    const className = isActive ? 'active-list' : 'inactive-list';
+
+    return (
+      <ul className={className}>
+        <li> Comment One </li>
+      </ul>
+    )
+  }
 }
 
 CommentList.propTypes = propTypes;

@@ -3,7 +3,7 @@ import React from 'react';
 // Once we set up Karma to run our tests through webpack
 // we will no longer need to have these long relative paths
 import CommentList from '../../src/components/CommentList';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 describe('(Component) CommentList', () => {
 
@@ -30,7 +30,7 @@ describe('(Component) CommentList', () => {
     });
 
     it('call onMount prop once it mounts', () => {
-        
+
         // create a spy for the onMount function
         const props = {
             onMount: sinon.spy()
@@ -43,4 +43,30 @@ describe('(Component) CommentList', () => {
         expect(props.onMount.calledOnce).to.be.true;
     });
 
+    it('should render as a <ul>', () => {
+        const props = { onMount: () => { } };
+        const wrapper = shallow(<CommentList  {...props} />);
+        expect(wrapper.type()).to.eql('ul');
+    });
+
+    describe('when active...', () => {
+        const wrapper = shallow(
+            // just passing isActive is an alias for true
+            <CommentList onMount={() => { }} isActive />
+        )
+
+        it('should render with className  active-list', () => {
+            expect(wrapper.prop('className')).to.eql('active-list');
+        });
+    });
+
+    describe('when inactive...', () => {
+        const wrapper = shallow(
+            <CommentList onMount={() => { } } isActive={false} />
+        )
+        it('should render with className inactive-list', () => {
+            expect(wrapper.prop('className')).to.eql('inactive-list');
+        });
+    });
 });
+
