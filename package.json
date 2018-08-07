@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "react": "^0.14.6",
-    "react-dom": "^0.14.6",
+    "react-dom": "^16.0.1",
     "yargs": "^3.31.0"
   },
   "devDependencies": {
