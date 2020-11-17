@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "yargs": "^3.31.0"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
